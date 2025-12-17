@@ -1,0 +1,93 @@
+*{ box-sizing:border-box; }
+:root{
+  --bg:#0b1220; --card:#111a2e; --text:#e8eefc; --muted:#a9b6d3;
+  --line:#223258; --accent:#4ea1ff; --accent2:#7c5cff;
+}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#070c17);
+  color:var(--text);
+}
+.wrap{ max-width:1100px; margin:0 auto; padding:18px; }
+h1{ margin:10px 0 6px; font-size:24px; }
+.sub{ margin:0; color:var(--muted); }
+
+.card{
+  background:rgba(17,26,46,.92);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px;
+  margin:14px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.row.info{ margin-top:10px; gap:18px; }
+.spacer{ flex:1; min-width:10px; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#0f1730;
+  color:var(--text);
+  cursor:pointer;
+  user-select:none;
+}
+.btn input{ display:none; }
+.btn.primary{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border:none;
+}
+.btn:disabled{ opacity:.55; cursor:not-allowed; }
+
+.select{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#0f1730;
+  color:var(--text);
+}
+
+.muted{ color:var(--muted); }
+.small{ font-size:12px; }
+
+.grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+
+.pill{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#0f1730;
+}
+.equation{
+  white-space:pre-wrap;
+  padding:12px;
+  background:#0f1730;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  min-height:90px;
+  margin-top:10px;
+}
+.metrics{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.metrics span{
+  padding:6px 10px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#0f1730;
+}
+
+.tableWrap{ overflow:auto; border-radius:12px; border:1px solid var(--line); }
+table{ width:100%; border-collapse:collapse; font-size:13px; }
+th,td{ padding:10px 10px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap; }
+thead th{ position:sticky; top:0; background:#0f1730; }
+
+.plot{ height:520px; }

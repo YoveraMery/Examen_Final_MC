@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ajuste Automático (CSV → Ecuación + Gráfica)</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Plotly: gráfica interactiva -->
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+
+  <!-- PapaParse: leer CSV -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <header class="wrap">
+    <h1>Ajuste de curva automático</h1>
+    <p class="sub">Sube un CSV con 2 columnas (t, x). La web calcula la mejor ecuación y la gráfica.</p>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="row">
+        <label class="btn">
+          <input id="file" type="file" accept=".csv,text/csv" />
+          Elegir archivo CSV
+        </label>
+        <span id="fileName" class="muted">Ningún archivo seleccionado</span>
+
+        <div class="spacer"></div>
+
+        <select id="mode" class="select">
+          <option value="traintest" selected>Train/Test (25% test) + BIC</option>
+          <option value="all">Todo (sin split) + BIC</option>
+        </select>
+
+        <button id="run" class="btn primary" disabled>Calcular ajuste</button>
+        <button id="demo" class="btn">Cargar demo</button>
+      </div>
+
+      <div class="row info">
+        <div><b>Columnas:</b> <span id="cols" class="muted">—</span></div>
+        <div><b>Estado:</b> <span id="status" class="muted">Sube un CSV para empezar.</span></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <section class="card">
+        <h2>Mejor ecuación</h2>
+        <div id="bestModel" class="pill">—</div>
+        <pre id="equation" class="equation">—</pre>
+        <div id="metrics" class="metrics">—</div>
+      </section>
+
+      <section class="card">
+        <h2>Modelos probados</h2>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Modelo</th>
+                <th>R²</th>
+                <th>RMSE</th>
+                <th>MAE</th>
+                <th>BIC</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+        <p class="muted small">Si R² es parecido, BIC prefiere el modelo más simple.</p>
+      </section>
+    </section>
+
+    <section class="card">
+      <h2>Gráfica</h2>
+      <div id="plot" class="plot"></div>
+    </section>
+
+    <section class="card">
+      <h2>Notas</h2>
+      <ul class="muted">
+        <li>Se toman las 2 primeras columnas del CSV como (t, x).</li>
+        <li>Modelo de saturación en la forma: <code>x(t) = L - B e^{-k t}</code>.</li>
+        <li>Todo corre en tu navegador (no usa backend).</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="wrap muted small">Hecho con HTML/CSS/JS + PapaParse + Plotly.</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
